@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Image Slider</title>
 </head>
 <body>
     <div class="slider">
         <div class="container">
-            <div class="sliderbx">
+            <div class="sliderBx">
                 <div class="slides">
-                    <input type="radio" name="radio-btn" id="radio1">
-                    <input type="radio" name="radio-btn" id="radio2">
-                    <input type="radio" name="radio-btn" id="radio3">
-                    <input type="radio" name="radio-btn" id="radio4">
+                    <input type="radio" name="radio1" id="radio1">
+                    <input type="radio" name="radio1" id="radio2">
+                    <input type="radio" name="radio1" id="radio3">
+
                     <div class="slide first">
                         <img src="images/img1.jpg" alt="">
                     </div>
@@ -25,19 +25,114 @@
                     <div class="slide">
                         <img src="images/img3.jpg" alt="">
                     </div>
-                    <div class="slide">
-                        <img src="images/img4.jpg" alt="">
-                    </div>
                 </div>
             </div>
-                    
-        <div class="navigation">
-            <label for="radio1" class="radio-btn-label"></label>
-            <label for="radio2" class="radio-btn-label"></label>
-            <label for="radio3" class="radio-btn-label"></label>
-            <label for="radio4" class="radio-btn-label"></label>
-        </div>
+            <div class="navigation">
+                <label for="radio1" value='2' name='nav-lbl' id="lbl1" class="label-btn current"></label>
+                <label for="radio2" value='3' name='nav-lbl' id="lbl2" class="label-btn"></label>
+                <label for="radio3" value='1' name='nav-lbl' id="lbl3" class="label-btn"></label>
+            </div>
         </div>
     </div>
+
+    <script>
+        
+        let counter = 2;
+        const intervalTime = 3000
+        let slideInterval
+        const auto = true
+        
+        function changeSlide() {
+            //Removing bg From Current Label
+            const current = document.querySelector('.current')
+            current.classList.remove('current')
+
+            //Adding Background to Next Label
+            if(current.nextElementSibling){
+                //Adding bg To Next Element
+                current.nextElementSibling.classList.add('current')
+            } else {
+                //Adding bg To First Element
+                document.querySelector(`#lbl1`).classList.add('current')
+            }
+            
+            //Selecting Next Radio Btn
+            document.querySelector(`#radio${counter}`).checked = true
+            counter++
+            if(counter > 3) {
+                counter = 1
+            } 
+        }
+        slideInterval = setInterval(changeSlide, intervalTime)
+        
+        document.addEventListener('click', function(e) {
+            //Get Name And Value Attributes Of Labels
+            const name = e.target.getAttribute('name')
+            const value = e.target.getAttribute('value')
+
+            //Execute Code When Clicked On Label
+            if(name == 'nav-lbl'){
+                //Get Clicked Label ID
+                const id = e.target.id
+                //Get Label
+                const label = document.querySelector(`#${id}`)
+                //Add Listener On Clicked Label 
+                label.addEventListener('click', function() {
+                    //For Radio Btn in changeSlide() Method
+                    counter = value
+                    if(auto){
+                        clearInterval(slideInterval)
+                        slideInterval = setInterval(changeSlide, intervalTime)
+                    }
+                    
+                    const current = document.querySelector('.current')
+                    current.classList.remove('current')
+                    label.classList.add('current')
+                })
+            }
+        }, false);
+
+        
+        // const label1 = document.querySelector(`#lbl1`)
+        // const label2 = document.querySelector(`#lbl2`)
+        // const label3 = document.querySelector(`#lbl3`)
+
+        // label1.addEventListener('click', function() {
+        //     counter = 2
+        //     if(auto){
+        //         clearInterval(slideInterval)
+        //         slideInterval = setInterval(changeSlide, intervalTime)
+        //     }
+            
+        //     const current = document.querySelector('.current')
+        //     current.classList.remove('current')
+        //     label1.classList.add('current')
+        // })
+        // label2.addEventListener('click', function() {
+        //     counter = 3
+        //     if(auto){
+        //         clearInterval(slideInterval)
+        //         slideInterval = setInterval(changeSlide, intervalTime)
+        //     }
+
+        //     const current = document.querySelector('.current')
+        //     current.classList.remove('current')
+        //     label2.classList.add('current')
+        // })
+        // label3.addEventListener('click', function() {
+        //     counter = 1
+        //     if(auto){
+        //         clearInterval(slideInterval)
+        //         slideInterval = setInterval(changeSlide, intervalTime)
+        //     }
+
+        //     const current = document.querySelector('.current')
+        //     current.classList.remove('current')
+        //     label3.classList.add('current')
+        // })
+
+        
+        
+    </script>
 </body>
 </html>
