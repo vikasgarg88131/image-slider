@@ -15,6 +15,7 @@
                     <input type="radio" name="radio1" id="radio1">
                     <input type="radio" name="radio1" id="radio2">
                     <input type="radio" name="radio1" id="radio3">
+                    <input type="radio" name="radio1" id="radio4">
 
                     <div class="slide first">
                         <img src="images/img1.jpg" alt="">
@@ -25,12 +26,16 @@
                     <div class="slide">
                         <img src="images/img3.jpg" alt="">
                     </div>
+                    <div class="slide">
+                        <img src="images/img4.jpg" alt="">
+                    </div>
                 </div>
             </div>
             <div class="navigation">
                 <label for="radio1" value='2' name='nav-lbl' id="lbl1" class="label-btn current"></label>
                 <label for="radio2" value='3' name='nav-lbl' id="lbl2" class="label-btn"></label>
-                <label for="radio3" value='1' name='nav-lbl' id="lbl3" class="label-btn"></label>
+                <label for="radio3" value='4' name='nav-lbl' id="lbl3" class="label-btn"></label>
+                <label for="radio4" value='1' name='nav-lbl' id="lbl4" class="label-btn"></label>
             </div>
         </div>
     </div>
@@ -59,7 +64,7 @@
             //Selecting Next Radio Btn
             document.querySelector(`#radio${counter}`).checked = true
             counter++
-            if(counter > 3) {
+            if(counter > 4) {
                 counter = 1
             } 
         }
